@@ -38,6 +38,11 @@ td{
     position: relative;
     width: 200px;
     height: 200px;
+    cursor: pointer;
+}
+
+td:hover{
+  background-color: rgba(10, 174, 29, 0.1)
 }
 
 .shape{
@@ -66,3 +71,7 @@ table {
   table tr td:last-child {
     border-right: 0;
   }
+
+.d-none{
+  display: none;
+}
