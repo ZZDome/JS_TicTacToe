@@ -37,19 +37,19 @@ function templatePlayfield(){
     <div class="playfieldContent">
         <table>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
+                <td><img class="shape" src="img/circle.png"><img class="shape" src="img/cross.png"></td>
             </tr>
         </table>
     </div>
