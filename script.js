@@ -118,6 +118,14 @@ function templatePlayfield() {
                 <span>Player 2</span>
             </div>
         </div>
+        <div class="line" style="top: 326px;"></div>
+        <div class="line" style="top: 528px;"></div>
+        <div class="line" style="top: 728px;"></div>
+        <div class="line spin90" style="top: 528px; left: 200px"></div>
+        <div class="line spin90" style="top: 528px;"></div>
+        <div class="line spin90" style="top: 528px; left: 602px"></div>
+        <div class="line spin45" style="top: 528px;"></div>
+        <div class="line spinNeg45" style="top: 528px;"></div>
         <table>
             <tr>
                 <td onclick = "fillShape(0)">

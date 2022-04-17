@@ -15,6 +15,26 @@ h1{
     font-size: 80px;
 }
 
+.line{
+  position: absolute;
+  left: 400px;
+  height: 16px;
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spin90{
+  transform: rotate(90deg);
+}
+
+.spin45{
+  transform: rotate(45deg);
+}
+
+.spinNeg45{
+  transform: rotate(135deg);
+}
+
 .playfieldHeader{
   display: flex;
   justify-content: space-between;
