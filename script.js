@@ -23,14 +23,20 @@ function drawField() {
 }
 
 function fillShape(id) {
-    if (currentShape == 'cross') {
-        currentShape = 'circle';
-    } else {
-        currentShape = 'cross';
+    if (!fields[id]) {
+        if (currentShape == 'cross') {
+            currentShape = 'circle';
+            document.getElementById('player2').classList.remove('playerInactive');
+            document.getElementById('player1').classList.add('playerInactive');
+        } else {
+            currentShape = 'cross';
+            document.getElementById('player1').classList.remove('playerInactive');
+            document.getElementById('player2').classList.add('playerInactive');
+        }
+        fields[id] = currentShape;
+        drawShape();
+        checkWin();
     }
-    fields[id] = currentShape;
-    drawShape();
-    checkWin();
 }
 
 function drawShape() {
@@ -45,42 +51,42 @@ function drawShape() {
     }
 }
 
-function checkWin(){
+function checkWin() {
     let winner;
 
-    if(fields[0] == fields[1] && fields[1] == fields[2] && fields[0]){
+    if (fields[0] == fields[1] && fields[1] == fields[2] && fields[0]) {
         winner = fields[0];
     }
 
-    if(fields[3] == fields[4] && fields[4] == fields[5] && fields[3]){
+    if (fields[3] == fields[4] && fields[4] == fields[5] && fields[3]) {
         winner = fields[3];
     }
 
-    if(fields[6] == fields[7] && fields[7] == fields[8] && fields[6]){
+    if (fields[6] == fields[7] && fields[7] == fields[8] && fields[6]) {
         winner = fields[6];
     }
 
-    if(fields[0] == fields[3] && fields[3] == fields[6] && fields[0]){
+    if (fields[0] == fields[3] && fields[3] == fields[6] && fields[0]) {
         winner = fields[0];
     }
 
-    if(fields[1] == fields[4] && fields[4] == fields[7] && fields[1]){
+    if (fields[1] == fields[4] && fields[4] == fields[7] && fields[1]) {
         winner = fields[1];
     }
 
-    if(fields[2] == fields[5] && fields[5] == fields[8] && fields[2]){
+    if (fields[2] == fields[5] && fields[5] == fields[8] && fields[2]) {
         winner = fields[2];
     }
 
-    if(fields[0] == fields[4] && fields[4] == fields[8] && fields[0]){
+    if (fields[0] == fields[4] && fields[4] == fields[8] && fields[0]) {
         winner = fields[0];
     }
 
-    if(fields[2] == fields[4] && fields[4] == fields[6] && fields[2]){
+    if (fields[2] == fields[4] && fields[4] == fields[6] && fields[2]) {
         winner = fields[2];
     }
 
-    if(!!winner){
+    if (!!winner) {
         console.log('GEWONNEN', winner);
     }
 }
@@ -102,6 +108,16 @@ function templateMainMenu() {
 function templatePlayfield() {
     return /* html */ `
     <div class="playfieldContent">
+        <div class="playfieldHeader">
+            <div id="player1" class="displayPlayer playerInactive">
+                <img src="img/circle.png">
+                <span>Player 1</span>
+            </div>
+            <div id="player2" class="displayPlayer">
+                <img src="img/cross.png">
+                <span>Player 2</span>
+            </div>
+        </div>
         <table>
             <tr>
                 <td onclick = "fillShape(0)">
