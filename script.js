@@ -1,5 +1,5 @@
 let fields = [];
-
+let gameOver = false;
 let currentShape = '';
 
 function init() {
@@ -23,7 +23,7 @@ function drawField() {
 }
 
 function fillShape(id) {
-    if (!fields[id]) {
+    if (!fields[id] && !gameOver) {
         if (currentShape == 'cross') {
             currentShape = 'circle';
             document.getElementById('player2').classList.remove('playerInactive');
@@ -56,37 +56,46 @@ function checkWin() {
 
     if (fields[0] == fields[1] && fields[1] == fields[2] && fields[0]) {
         winner = fields[0];
+        document.getElementById('winLine0').style.transform = 'scaleX(1)';
     }
 
     if (fields[3] == fields[4] && fields[4] == fields[5] && fields[3]) {
         winner = fields[3];
+        document.getElementById('winLine1').style.transform = 'scaleX(1)';
     }
 
     if (fields[6] == fields[7] && fields[7] == fields[8] && fields[6]) {
         winner = fields[6];
+        document.getElementById('winLine2').style.transform = 'scaleX(1)';
     }
 
     if (fields[0] == fields[3] && fields[3] == fields[6] && fields[0]) {
         winner = fields[0];
+        document.getElementById('winLine3').style.transform = 'scaleX(1) rotate(90deg)';
     }
 
     if (fields[1] == fields[4] && fields[4] == fields[7] && fields[1]) {
         winner = fields[1];
+        document.getElementById('winLine4').style.transform = 'scaleX(1) rotate(90deg)';
     }
 
     if (fields[2] == fields[5] && fields[5] == fields[8] && fields[2]) {
         winner = fields[2];
+        document.getElementById('winLine5').style.transform = 'scaleX(1) rotate(90deg)';
     }
 
     if (fields[0] == fields[4] && fields[4] == fields[8] && fields[0]) {
         winner = fields[0];
+        document.getElementById('winLine6').style.transform = 'scaleX(1.0) rotate(45deg)';
     }
 
     if (fields[2] == fields[4] && fields[4] == fields[6] && fields[2]) {
         winner = fields[2];
+        document.getElementById('winLine7').style.transform = 'scaleX(1.0) rotate(135deg)';
     }
 
     if (!!winner) {
+        gameOver = true;
         console.log('GEWONNEN', winner);
     }
 }
@@ -120,14 +129,14 @@ function templatePlayfield() {
         </div>
         
         <table>
-        <div class="line" style="top: 230px; left: 46px;"></div>
-        <div class="line" style="top: 401px; left: 46px;"></div>
-        <div class="line" style="top: 586px; left: 46px;"></div>
-        <div class="line spin90" style="top: 367px; left: -155px;"></div>
-        <div class="line spin90" style="top: 350px; left: 47px;"></div>
-        <div class="line spin90" style="top: 333px; left: 247px"></div>
-        <div class="line spin45" style="top: 328px; left: 53px;"></div>
-        <div class="line spinNeg45" style="top: 313px; left: 40px;"></div>
+        <div id="winLine0" class="line" style="top: 215px; left: 46px;"></div>
+        <div id="winLine1" class="line" style="top: 401px; left: 46px;"></div>
+        <div id="winLine2" class="line" style="top: 586px; left: 46px;"></div>
+        <div id="winLine3" class="line spin90" style="top: 367px; left: -155px;"></div>
+        <div id="winLine4" class="line spin90" style="top: 350px; left: 47px;"></div>
+        <div id="winLine5" class="line spin90" style="top: 333px; left: 247px"></div>
+        <div id="winLine6" class="line spin45" style="top: 328px; left: 53px;"></div>
+        <div id="winLine7" class="line spinNeg45" style="top: 313px; left: 40px;"></div>
             <tr>
                 <td onclick = "fillShape(0)">
                     <img id="circle0" class="shape d-none" src="img/circle.png">
