@@ -118,21 +118,22 @@ function templatePlayfield() {
                 <span>Player 2</span>
             </div>
         </div>
-        <div class="line" style="top: 326px;"></div>
-        <div class="line" style="top: 528px;"></div>
-        <div class="line" style="top: 728px;"></div>
-        <div class="line spin90" style="top: 528px; left: 200px"></div>
-        <div class="line spin90" style="top: 528px;"></div>
-        <div class="line spin90" style="top: 528px; left: 602px"></div>
-        <div class="line spin45" style="top: 528px;"></div>
-        <div class="line spinNeg45" style="top: 528px;"></div>
+        
         <table>
+        <div class="line" style="top: 230px; left: 46px;"></div>
+        <div class="line" style="top: 401px; left: 46px;"></div>
+        <div class="line" style="top: 586px; left: 46px;"></div>
+        <div class="line spin90" style="top: 367px; left: -155px;"></div>
+        <div class="line spin90" style="top: 350px; left: 47px;"></div>
+        <div class="line spin90" style="top: 333px; left: 247px"></div>
+        <div class="line spin45" style="top: 328px; left: 53px;"></div>
+        <div class="line spinNeg45" style="top: 313px; left: 40px;"></div>
             <tr>
                 <td onclick = "fillShape(0)">
                     <img id="circle0" class="shape d-none" src="img/circle.png">
                     <img id="cross0" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(1)">
+                <td onclick = "fillShape(1)">   
                     <img id="circle1" class="shape d-none" src="img/circle.png">
                     <img id="cross1" class="shape d-none" src="img/cross.png">
                 </td>
@@ -141,7 +142,7 @@ function templatePlayfield() {
                     <img id="cross2" class="shape d-none" src="img/cross.png">
                 </td>
             </tr>
-            <tr>
+            <tr>  
                 <td onclick = "fillShape(3)">
                     <img id="circle3" class="shape d-none" src="img/circle.png">
                     <img id="cross3" class="shape d-none" src="img/cross.png">

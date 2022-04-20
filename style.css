@@ -17,10 +17,11 @@ h1{
 
 .line{
   position: absolute;
-  left: 400px;
+  position: relative;
   height: 16px;
   width: 500px;
   background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(0.0);
 }
 
 .spin90{
@@ -74,6 +75,10 @@ h1{
     width: 40%;
     height: 100px;
     font-size: 30px;
+}
+
+table{
+  position: relative;
 }
 
 tr{
