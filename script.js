@@ -39,14 +39,25 @@ function drawField() {
 
 function checkCPU(id){
     if(cpuGame){
-        if(cpuTime){
-            cpuMove();
-        }else{
+        if(!cpuTime){
+            cpuTime = true;
             fillShape(id);
         }
     }else{
         fillShape(id);
     }
+}
+
+function cpuMove(){
+    let emptyFields =[];
+    for(let i = 0; i < 8; i++){
+        if(!fields[i]){
+            emptyFields.push(i);
+        }
+    }
+    let randID = emptyFields[Math.floor(Math.random()*emptyFields.length)];
+    cpuTime = false;
+    fillShape(randID);
 }
 
 function fillShape(id) {
@@ -79,7 +90,21 @@ function drawShape() {
     }
 }
 
+function checkDraw(){
+        if(fields[0] && fields[1] && fields[2] && fields[3] && fields[4] && fields[5] && fields[6] && fields[7] && fields[8]){
+            gameOver = true;
+            setTimeout(function () {
+                document.getElementById('endCardImage').classList.remove('d-none');
+                document.getElementById('endCardBtn').classList.remove('d-none');
+            }, 1000);
+        }else{
+            return;
+        }
+    
+}
+
 function checkWin() {
+    checkDraw();
     let winner;
 
     if (fields[0] == fields[1] && fields[1] == fields[2] && fields[0]) {
@@ -127,6 +152,12 @@ function checkWin() {
         setTimeout(function () {
             document.getElementById('endCardImage').classList.remove('d-none');
             document.getElementById('endCardBtn').classList.remove('d-none');
+        }, 1000);
+    }
+
+    if(cpuTime){
+        setTimeout(function () {
+            cpuMove()
         }, 1000);
     }
 }
