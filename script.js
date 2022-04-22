@@ -1,9 +1,21 @@
 let fields = [];
 let gameOver = false;
 let currentShape = '';
+let cpuGame = false;
+let cpuTime = false;
+
+//functions//////////////////////////////////////////////////////////////////////////////////
 
 function init() {
+    resetGame();
     showMainMenu();
+}
+
+function resetGame() {
+    fields = [];
+    gameOver = false;
+    currentShape = '';
+    cpuGame = false;
 }
 
 function showMainMenu() {
@@ -12,14 +24,29 @@ function showMainMenu() {
     content.innerHTML += templateMainMenu();
 }
 
-function loadGame() {
-    drawField();
+function loadGame(cpu) {
+    drawField()
+    if (cpu) {
+        cpuGame = true;
+    }
 }
 
 function drawField() {
     let content = document.getElementById('content');
     content.innerHTML = ``;
     content.innerHTML += templatePlayfield();
+}
+
+function checkCPU(id){
+    if(cpuGame){
+        if(cpuTime){
+            cpuMove();
+        }else{
+            fillShape(id);
+        }
+    }else{
+        fillShape(id);
+    }
 }
 
 function fillShape(id) {
@@ -37,6 +64,7 @@ function fillShape(id) {
         drawShape();
         checkWin();
     }
+
 }
 
 function drawShape() {
@@ -71,43 +99,50 @@ function checkWin() {
 
     if (fields[0] == fields[3] && fields[3] == fields[6] && fields[0]) {
         winner = fields[0];
-        document.getElementById('winLine3').style.transform = 'scaleX(1) rotate(90deg)';
+        document.getElementById('winLine3').style.transform = 'rotate(90deg) scaleX(1)';
     }
 
     if (fields[1] == fields[4] && fields[4] == fields[7] && fields[1]) {
         winner = fields[1];
-        document.getElementById('winLine4').style.transform = 'scaleX(1) rotate(90deg)';
+        document.getElementById('winLine4').style.transform = 'rotate(90deg) scaleX(1)';
     }
 
     if (fields[2] == fields[5] && fields[5] == fields[8] && fields[2]) {
         winner = fields[2];
-        document.getElementById('winLine5').style.transform = 'scaleX(1) rotate(90deg)';
+        document.getElementById('winLine5').style.transform = 'rotate(90deg) scaleX(1)';
     }
 
     if (fields[0] == fields[4] && fields[4] == fields[8] && fields[0]) {
         winner = fields[0];
-        document.getElementById('winLine6').style.transform = 'scaleX(1.0) rotate(45deg)';
+        document.getElementById('winLine6').style.transform = 'rotate(45deg) scaleX(1.5)';
     }
 
     if (fields[2] == fields[4] && fields[4] == fields[6] && fields[2]) {
         winner = fields[2];
-        document.getElementById('winLine7').style.transform = 'scaleX(1.0) rotate(135deg)';
+        document.getElementById('winLine7').style.transform = 'rotate(135deg) scaleX(1.5)';
     }
 
     if (!!winner) {
         gameOver = true;
-        console.log('GEWONNEN', winner);
+        setTimeout(function () {
+            document.getElementById('endCardImage').classList.remove('d-none');
+            document.getElementById('endCardBtn').classList.remove('d-none');
+        }, 1000);
     }
 }
 
-//Templates-----------------------------------------------------------------------------------
+function endGame() {
+    init();
+}
+
+//Templates///////////////////////////////////////////////////////////////////////////////////////
 
 function templateMainMenu() {
     return /* html */ `
     <div class="mainMenuContent">
         <h1>Tic Tac Toe</h1>
-        <button onclick="loadGame()" type="button" class="btn btn-secondary mainMenuBtn">Play</button>
-        <button type="button" class="btn btn-secondary mainMenuBtn">Placeholder</button>
+        <button onclick="loadGame(false)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. Player</button>
+        <button onclick="loadGame(true)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. CPU</button>
         <button type="button" class="btn btn-secondary mainMenuBtn">Options</button>
         <button type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
     </div>
@@ -116,6 +151,8 @@ function templateMainMenu() {
 
 function templatePlayfield() {
     return /* html */ `
+    <img id="endCardImage" class="endCardImage d-none" src="img/game-over.png">
+    <button onclick="endGame()" id="endCardBtn" type="button" class="endCardBtn btn btn-primary btn-lg d-none">Back to main menu</button>
     <div class="playfieldContent">
         <div class="playfieldHeader">
             <div id="player1" class="displayPlayer playerInactive">
@@ -138,43 +175,43 @@ function templatePlayfield() {
         <div id="winLine6" class="line spin45" style="top: 328px; left: 53px;"></div>
         <div id="winLine7" class="line spinNeg45" style="top: 313px; left: 40px;"></div>
             <tr>
-                <td onclick = "fillShape(0)">
+                <td onclick = "checkCPU(0)">
                     <img id="circle0" class="shape d-none" src="img/circle.png">
                     <img id="cross0" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(1)">   
+                <td onclick = "checkCPU(1)">   
                     <img id="circle1" class="shape d-none" src="img/circle.png">
                     <img id="cross1" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(2)">
+                <td onclick = "checkCPU(2)">
                     <img id="circle2" class="shape d-none" src="img/circle.png">
                     <img id="cross2" class="shape d-none" src="img/cross.png">
                 </td>
             </tr>
             <tr>  
-                <td onclick = "fillShape(3)">
+                <td onclick = "checkCPU(3)">
                     <img id="circle3" class="shape d-none" src="img/circle.png">
                     <img id="cross3" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(4)">
+                <td onclick = "checkCPU(4)">
                     <img id="circle4" class="shape d-none" src="img/circle.png">
                     <img id="cross4" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(5)">
+                <td onclick = "checkCPU(5)">
                     <img id="circle5" class="shape d-none" src="img/circle.png">
                     <img id="cross5" class="shape d-none" src="img/cross.png">
                 </td>
             </tr>
             <tr>
-                <td onclick = "fillShape(6)">
+                <td onclick = "checkCPU(6)">
                     <img id="circle6" class="shape d-none" src="img/circle.png">
                     <img id="cross6" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(7)">
+                <td onclick = "checkCPU(7)">
                     <img id="circle7" class="shape d-none" src="img/circle.png">
                     <img id="cross7" class="shape d-none" src="img/cross.png">
                 </td>
-                <td onclick = "fillShape(8)">
+                <td onclick = "checkCPU(8)">
                     <img id="circle8" class="shape d-none" src="img/circle.png">
                     <img id="cross8" class="shape d-none" src="img/cross.png">
                 </td>

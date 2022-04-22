@@ -23,6 +23,7 @@ h1{
   background-color: rgba(0, 0, 0, 0.5);
   transform: scaleX(0.0);
   transition: transform 225ms ease-in-out;
+  z-index: 1;
 }
 
 .spin90{
@@ -127,6 +128,37 @@ table {
     border-right: 0;
   }
 
+.endCardContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.endCardImage{
+  position: absolute;
+  object-fit: contain;
+  height: 100vh;
+  width: 100%;
+  z-index: 2;
+  animation: fadeIn 225ms ease-in-out;
+}  
+
+.endCardBtn{
+  position: absolute;
+  z-index: 2;
+  top: 60%;
+  animation: fadeIn 225ms ease-in-out;
+}
+
 .d-none{
   display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
