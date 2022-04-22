@@ -43,8 +43,7 @@ h1{
 
 .playfieldHeader{
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+  justify-content: space-evenly;
 }
 
 .displayPlayer{
