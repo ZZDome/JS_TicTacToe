@@ -100,7 +100,6 @@ function checkDraw(){
         }else{
             return;
         }
-    
 }
 
 function checkWin() {
