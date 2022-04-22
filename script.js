@@ -173,8 +173,8 @@ function templateMainMenu() {
         <h1>Tic Tac Toe</h1>
         <button onclick="loadGame(false)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. Player</button>
         <button onclick="loadGame(true)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. CPU</button>
-        <button type="button" class="btn btn-secondary mainMenuBtn">Options</button>
-        <button type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
+        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary mainMenuBtn">Options</button>
+        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
     </div>
     `;
 }
