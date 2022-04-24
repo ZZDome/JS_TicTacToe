@@ -19,7 +19,7 @@ function init() {
     resetGame();
     showMainMenu();
     backgroundSound.loop = true;
-    backgroundSound.play;
+    backgroundSound.play();
 
 }
 
@@ -86,7 +86,7 @@ function fillShape(id) {
         fields[id] = currentShape;
         drawShape();
         checkWin();
-        plopSound.play;
+        plopSound.play();
     }
 
 }
