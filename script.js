@@ -21,8 +21,8 @@ backgroundSound.loop = true;
 function init() {
     resetGame();
     showMainMenu();
-    backgroundSound.play();
     mergeAudio();
+    backgroundSound.play(); 
 }
 
 function mergeAudio() {
