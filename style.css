@@ -149,7 +149,7 @@ table {
   animation: fadeIn 225ms ease-in-out;
 }
 
-li{
+li, .card-header{
   text-align: center;
 }
 

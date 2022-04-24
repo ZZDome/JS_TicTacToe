@@ -367,6 +367,17 @@ function templateOptions() {
                         <button onclick="calcAudioEffects(1)" type="button" class="btn btn-secondary btn-sm">></button>
                     </li>
                 </ul>
+                <div class="card-header">
+                    Game options
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        CPU Level
+                        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary btn-sm">easy</button>
+                        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary btn-sm">medium</button>
+                        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary btn-sm">hard</button>
+                    </li>
+                </ul>
             </div>
             <button onclick="showMainMenu()" type="button" class="btn btn-secondary mainMenuBtn">Back</button>
         </div>
