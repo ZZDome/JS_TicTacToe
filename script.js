@@ -3,12 +3,24 @@ let gameOver = false;
 let currentShape = '';
 let cpuGame = false;
 let cpuTime = false;
+let plopSound = new Audio('sounds/plop.mp3');
+let endSound = new Audio('sounds/end.mp3');
+let backgroundSound = new Audio('sounds/background.mp3');
+
+//options////////////////////////////////////////////////////////////////////////////////////
+
+plopSound.volume = 0.5;
+endSound.volume = 0.5;
+backgroundSound.volume = 0.5;
 
 //functions//////////////////////////////////////////////////////////////////////////////////
 
 function init() {
     resetGame();
     showMainMenu();
+    backgroundSound.loop = true;
+    backgroundSound.play;
+
 }
 
 function resetGame() {
@@ -74,6 +86,7 @@ function fillShape(id) {
         fields[id] = currentShape;
         drawShape();
         checkWin();
+        plopSound.play;
     }
 
 }
@@ -88,6 +101,7 @@ function drawShape() {
             document.getElementById('cross' + i).classList.remove('d-none');
         }
     }
+
 }
 
 function checkDraw(){
