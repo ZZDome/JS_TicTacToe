@@ -6,22 +6,69 @@ let cpuTime = false;
 let plopSound = new Audio('sounds/plop.mp3');
 let endSound = new Audio('sounds/end.mp3');
 let backgroundSound = new Audio('sounds/background.mp3');
+let effectVolume = 50;
+let musicVolume = 50;
 
 //options////////////////////////////////////////////////////////////////////////////////////
 
 plopSound.volume = 0.5;
 endSound.volume = 0.5;
 backgroundSound.volume = 0.5;
+backgroundSound.loop = true;
 
 //functions//////////////////////////////////////////////////////////////////////////////////
 
 function init() {
     resetGame();
     showMainMenu();
-    backgroundSound.loop = true;
     backgroundSound.play();
-
+    mergeAudio();
 }
+
+function mergeAudio() {
+    plopSound.volume = effectVolume / 100;
+    endSound.volume = effectVolume / 100;
+    backgroundSound.volume = musicVolume / 100;
+}
+
+function calcAudioMusic(dir) {
+    if (dir == 0) {
+        if (musicVolume <= 0) {
+            return;
+        } else {
+            musicVolume = musicVolume - 10;
+        }
+    } else if (dir == 1) {
+        if (musicVolume >= 100) {
+            return;
+        } else {
+            musicVolume = musicVolume + 10;
+        }
+    }
+    musicVolume = Math.round(musicVolume);
+    mergeAudio();
+    showOptions();
+}
+
+function calcAudioEffects(dir) {
+    if (dir == 0) {
+        if (effectVolume <= 0) {
+            return;
+        } else {
+            effectVolume = effectVolume - 10;
+        }
+    } else if (dir == 1) {
+        if (effectVolume >= 100) {
+            return;
+        } else {
+            effectVolume = effectVolume + 10;
+        }
+    }
+    effectVolume = Math.round(effectVolume);
+    mergeAudio()
+    showOptions();
+}
+
 
 function resetGame() {
     fields = [];
@@ -49,25 +96,25 @@ function drawField() {
     content.innerHTML += templatePlayfield();
 }
 
-function checkCPU(id){
-    if(cpuGame){
-        if(!cpuTime){
+function checkCPU(id) {
+    if (cpuGame) {
+        if (!cpuTime) {
             cpuTime = true;
             fillShape(id);
         }
-    }else{
+    } else {
         fillShape(id);
     }
 }
 
-function cpuMove(){
-    let emptyFields =[];
-    for(let i = 0; i < 8; i++){
-        if(!fields[i]){
+function cpuMove() {
+    let emptyFields = [];
+    for (let i = 0; i < 8; i++) {
+        if (!fields[i]) {
             emptyFields.push(i);
         }
     }
-    let randID = emptyFields[Math.floor(Math.random()*emptyFields.length)];
+    let randID = emptyFields[Math.floor(Math.random() * emptyFields.length)];
     cpuTime = false;
     fillShape(randID);
 }
@@ -104,16 +151,16 @@ function drawShape() {
 
 }
 
-function checkDraw(){
-        if(fields[0] && fields[1] && fields[2] && fields[3] && fields[4] && fields[5] && fields[6] && fields[7] && fields[8]){
-            gameOver = true;
-            setTimeout(function () {
-                document.getElementById('endCardImage').classList.remove('d-none');
-                document.getElementById('endCardBtn').classList.remove('d-none');
-            }, 1000);
-        }else{
-            return;
-        }
+function checkDraw() {
+    if (fields[0] && fields[1] && fields[2] && fields[3] && fields[4] && fields[5] && fields[6] && fields[7] && fields[8]) {
+        gameOver = true;
+        setTimeout(function () {
+            document.getElementById('endCardImage').classList.remove('d-none');
+            document.getElementById('endCardBtn').classList.remove('d-none');
+        }, 1000);
+    } else {
+        return;
+    }
 }
 
 function checkWin() {
@@ -165,10 +212,11 @@ function checkWin() {
         setTimeout(function () {
             document.getElementById('endCardImage').classList.remove('d-none');
             document.getElementById('endCardBtn').classList.remove('d-none');
+            endSound.play();
         }, 1000);
     }
 
-    if(cpuTime){
+    if (cpuTime) {
         setTimeout(function () {
             cpuMove()
         }, 1000);
@@ -179,10 +227,16 @@ function endGame() {
     init();
 }
 
-function showCredits(){
+function showCredits() {
     let content = document.getElementById('content');
     content.innerHTML = ``;
     content.innerHTML += templateCredits();
+}
+
+function showOptions() {
+    let content = document.getElementById('content');
+    content.innerHTML = ``;
+    content.innerHTML += templateOptions();
 }
 
 //Templates///////////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +247,7 @@ function templateMainMenu() {
         <h1>Tic Tac Toe</h1>
         <button onclick="loadGame(false)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. Player</button>
         <button onclick="loadGame(true)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. CPU</button>
-        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary mainMenuBtn">Options</button>
+        <button onclick="showOptions()" type="button" class="btn btn-secondary mainMenuBtn">Options</button>
         <button onclick="showCredits()" type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
     </div>
     `;
@@ -271,7 +325,7 @@ function templatePlayfield() {
     `;
 }
 
-function templateCredits(){
+function templateCredits() {
     return /* html */ `
         <div class="mainMenuContent">
             <h1>Credits</h1>
@@ -284,6 +338,34 @@ function templateCredits(){
                 <li class="list-group-item"><b>Styling:</b> Dominik Waldow</li>
                 <li class="list-group-item"><b>Scripting:</b> Dominik Waldow</li>
                 <li class="list-group-item">Visit my profile on <a href="https://github.com/ZZDome">GitHub</a></li>
+                </ul>
+            </div>
+            <button onclick="showMainMenu()" type="button" class="btn btn-secondary mainMenuBtn">Back</button>
+        </div>
+    `;
+}
+
+function templateOptions() {
+    return /* html */ `
+        <div class="mainMenuContent">
+            <h1>Options</h1>
+            <div class="card" style="width: 32rem;">
+                <div class="card-header">
+                    Sound options
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Music
+                        <button onclick="calcAudioMusic(0)" type="button" class="btn btn-secondary btn-sm"><</button>
+                        ${musicVolume}%
+                        <button onclick="calcAudioMusic(1)" type="button" class="btn btn-secondary btn-sm">></button>
+                    </li>
+                    <li class="list-group-item">
+                        Effect
+                        <button onclick="calcAudioEffects(0)" type="button" class="btn btn-secondary btn-sm"><</button>
+                        ${effectVolume}%
+                        <button onclick="calcAudioEffects(1)" type="button" class="btn btn-secondary btn-sm">></button>
+                    </li>
                 </ul>
             </div>
             <button onclick="showMainMenu()" type="button" class="btn btn-secondary mainMenuBtn">Back</button>
