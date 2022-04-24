@@ -149,6 +149,10 @@ table {
   animation: fadeIn 225ms ease-in-out;
 }
 
+li{
+  text-align: center;
+}
+
 .d-none{
   display: none;
 }

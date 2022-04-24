@@ -165,6 +165,12 @@ function endGame() {
     init();
 }
 
+function showCredits(){
+    let content = document.getElementById('content');
+    content.innerHTML = ``;
+    content.innerHTML += templateCredits();
+}
+
 //Templates///////////////////////////////////////////////////////////////////////////////////////
 
 function templateMainMenu() {
@@ -174,7 +180,7 @@ function templateMainMenu() {
         <button onclick="loadGame(false)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. Player</button>
         <button onclick="loadGame(true)" type="button" class="btn btn-secondary mainMenuBtn">Player vs. CPU</button>
         <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary mainMenuBtn">Options</button>
-        <button onclick="alert('avalable on future update')" type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
+        <button onclick="showCredits()" type="button" class="btn btn-secondary mainMenuBtn">Credits</button>
     </div>
     `;
 }
@@ -248,5 +254,25 @@ function templatePlayfield() {
             </tr>
         </table>
     </div>
+    `;
+}
+
+function templateCredits(){
+    return /* html */ `
+        <div class="mainMenuContent">
+            <h1>Credits</h1>
+            <div class="card" style="width: 32rem;">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Creator:</b> Dominik Waldow</li>
+                <li class="list-group-item"><b>Idea:</b> DeveloperAkademie</li>
+                <li class="list-group-item"><b>Design:</b> DeveloperAkademie and Dominik Waldow</li>
+                <li class="list-group-item"><b>Markup:</b> Dominik Waldow</li>
+                <li class="list-group-item"><b>Styling:</b> Dominik Waldow</li>
+                <li class="list-group-item"><b>Scripting:</b> Dominik Waldow</li>
+                <li class="list-group-item">Visit my profile on <a href="https://github.com/ZZDome">GitHub</a></li>
+                </ul>
+            </div>
+            <button onclick="showMainMenu()" type="button" class="btn btn-secondary mainMenuBtn">Back</button>
+        </div>
     `;
 }
